@@ -26,3 +26,6 @@
 - Newtonsoft.Json (JSON.Net)
 - VLC.DotNet
 - LibVLC (VideoLAN)
+
+### Name and app inspiration
+[The Wolf's Stash by ZepiWolf](https://play.google.com/store/apps/details?id=se.zepiwolf.tws.play&hl=en&gl=US)

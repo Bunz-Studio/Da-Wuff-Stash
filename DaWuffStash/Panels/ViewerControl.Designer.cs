@@ -48,6 +48,12 @@
             this.loadingLabel = new System.Windows.Forms.Label();
             this.vlcControl = new Vlc.DotNet.Forms.VlcControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.vlcMediaControls = new System.Windows.Forms.Panel();
+            this.CT_TrackBar = new System.Windows.Forms.TrackBar();
+            this.CT_PlayLB = new System.Windows.Forms.Label();
+            this.CT_PauseLB = new System.Windows.Forms.Label();
+            this.CT_StopLB = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.bottomConsole = new System.Windows.Forms.Panel();
             this.consoleLabel = new System.Windows.Forms.Label();
             this.sidePanel.SuspendLayout();
@@ -59,6 +65,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.vlcMediaControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CT_TrackBar)).BeginInit();
             this.bottomConsole.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,6 +173,7 @@
             this.sourcesList.Name = "sourcesList";
             this.sourcesList.Size = new System.Drawing.Size(205, 67);
             this.sourcesList.TabIndex = 4;
+            this.sourcesList.DoubleClick += new System.EventHandler(this.sourcesList_DoubleClick);
             // 
             // tagsList
             // 
@@ -177,6 +186,7 @@
             this.tagsList.Name = "tagsList";
             this.tagsList.Size = new System.Drawing.Size(205, 119);
             this.tagsList.TabIndex = 3;
+            this.tagsList.DoubleClick += new System.EventHandler(this.tagsList_DoubleClick);
             // 
             // artistsList
             // 
@@ -188,6 +198,7 @@
             this.artistsList.Name = "artistsList";
             this.artistsList.Size = new System.Drawing.Size(205, 67);
             this.artistsList.TabIndex = 2;
+            this.artistsList.DoubleClick += new System.EventHandler(this.artistsList_DoubleClick);
             // 
             // descriptionTextBox
             // 
@@ -253,11 +264,13 @@
             // 
             // vlcControl
             // 
+            this.vlcControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.vlcControl.BackColor = System.Drawing.Color.Black;
-            this.vlcControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vlcControl.Location = new System.Drawing.Point(0, 0);
             this.vlcControl.Name = "vlcControl";
-            this.vlcControl.Size = new System.Drawing.Size(713, 457);
+            this.vlcControl.Size = new System.Drawing.Size(713, 413);
             this.vlcControl.Spu = -1;
             this.vlcControl.TabIndex = 4;
             this.vlcControl.Text = "vlcControl1";
@@ -274,11 +287,12 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.vlcMediaControls);
             this.splitContainer1.Panel1.Controls.Add(this.bottomConsole);
             this.splitContainer1.Panel1.Controls.Add(this.loadingPanel);
+            this.splitContainer1.Panel1.Controls.Add(this.vlcControl);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox);
             this.splitContainer1.Panel1.Controls.Add(this.webBrowser);
-            this.splitContainer1.Panel1.Controls.Add(this.vlcControl);
             // 
             // splitContainer1.Panel2
             // 
@@ -286,6 +300,69 @@
             this.splitContainer1.Size = new System.Drawing.Size(931, 457);
             this.splitContainer1.SplitterDistance = 713;
             this.splitContainer1.TabIndex = 5;
+            // 
+            // vlcMediaControls
+            // 
+            this.vlcMediaControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.vlcMediaControls.Controls.Add(this.CT_TrackBar);
+            this.vlcMediaControls.Controls.Add(this.CT_PlayLB);
+            this.vlcMediaControls.Controls.Add(this.CT_PauseLB);
+            this.vlcMediaControls.Controls.Add(this.CT_StopLB);
+            this.vlcMediaControls.Controls.Add(this.label1);
+            this.vlcMediaControls.Location = new System.Drawing.Point(0, 419);
+            this.vlcMediaControls.Name = "vlcMediaControls";
+            this.vlcMediaControls.Size = new System.Drawing.Size(713, 38);
+            this.vlcMediaControls.TabIndex = 6;
+            this.vlcMediaControls.Visible = false;
+            // 
+            // CT_TrackBar
+            // 
+            this.CT_TrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CT_TrackBar.AutoSize = false;
+            this.CT_TrackBar.Location = new System.Drawing.Point(3, 7);
+            this.CT_TrackBar.Name = "CT_TrackBar";
+            this.CT_TrackBar.Size = new System.Drawing.Size(521, 23);
+            this.CT_TrackBar.TabIndex = 4;
+            // 
+            // CT_PlayLB
+            // 
+            this.CT_PlayLB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CT_PlayLB.Location = new System.Drawing.Point(530, 8);
+            this.CT_PlayLB.Name = "CT_PlayLB";
+            this.CT_PlayLB.Size = new System.Drawing.Size(56, 23);
+            this.CT_PlayLB.TabIndex = 3;
+            this.CT_PlayLB.Text = "Play";
+            this.CT_PlayLB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CT_PauseLB
+            // 
+            this.CT_PauseLB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CT_PauseLB.Location = new System.Drawing.Point(592, 7);
+            this.CT_PauseLB.Name = "CT_PauseLB";
+            this.CT_PauseLB.Size = new System.Drawing.Size(56, 23);
+            this.CT_PauseLB.TabIndex = 2;
+            this.CT_PauseLB.Text = "Pause";
+            this.CT_PauseLB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CT_StopLB
+            // 
+            this.CT_StopLB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CT_StopLB.Location = new System.Drawing.Point(654, 7);
+            this.CT_StopLB.Name = "CT_StopLB";
+            this.CT_StopLB.Size = new System.Drawing.Size(56, 23);
+            this.CT_StopLB.TabIndex = 1;
+            this.CT_StopLB.Text = "Stop";
+            this.CT_StopLB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 0;
             // 
             // bottomConsole
             // 
@@ -323,6 +400,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.vlcMediaControls.ResumeLayout(false);
+            this.vlcMediaControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CT_TrackBar)).EndInit();
             this.bottomConsole.ResumeLayout(false);
             this.bottomConsole.PerformLayout();
             this.ResumeLayout(false);
@@ -352,5 +432,11 @@
         private System.Windows.Forms.Label openFileButton;
         private System.Windows.Forms.Panel bottomConsole;
         private System.Windows.Forms.Label consoleLabel;
+        private System.Windows.Forms.Panel vlcMediaControls;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label CT_StopLB;
+        private System.Windows.Forms.Label CT_PlayLB;
+        private System.Windows.Forms.Label CT_PauseLB;
+        private System.Windows.Forms.TrackBar CT_TrackBar;
     }
 }

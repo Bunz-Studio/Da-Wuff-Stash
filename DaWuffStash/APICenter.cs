@@ -146,9 +146,10 @@ namespace DaWuffStash
             }
             fileName = Path.GetFileName(url);
             isVideo = Path.GetExtension(url).Contains("webm") || Path.GetExtension(url).Contains("mp4");
-            directory = preview ? "Posts/Preview" : "Posts";
+            string previewPath = Settings.GetPreviewPostsPath();
+            directory = preview ? previewPath : Settings.GetPostsPath();
             Console.WriteLine("Getting image for: " + url);
-            if (!Directory.Exists("Posts/Preview")) Directory.CreateDirectory("Posts/Preview");
+            if (!Directory.Exists(previewPath)) Directory.CreateDirectory(previewPath);
             string savePath = Path.Combine(directory, fileName);
             Console.WriteLine("Is preview: " + preview);
             Console.WriteLine("With path: " + savePath);

@@ -17,7 +17,6 @@
 - Show picture posts
 - Show video posts (with the VLC version)
 ### TODO
-- Add Settings
 - Add more reliable list view
 - Get thumbnails better
 - Learn more e621/e926 APIs

@@ -30,6 +30,7 @@
         {
             this.previewBox = new System.Windows.Forms.PictureBox();
             this.infoLabel = new System.Windows.Forms.Label();
+            this.loadProgressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,11 +59,21 @@
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.infoLabel.Click += new System.EventHandler(this.infoLabel_Click);
             // 
+            // loadProgressBar
+            // 
+            this.loadProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadProgressBar.Location = new System.Drawing.Point(4, 3);
+            this.loadProgressBar.Name = "loadProgressBar";
+            this.loadProgressBar.Size = new System.Drawing.Size(150, 10);
+            this.loadProgressBar.TabIndex = 2;
+            // 
             // PostListItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(46)))), ((int)(((byte)(86)))));
+            this.Controls.Add(this.loadProgressBar);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.previewBox);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(199)))), ((int)(((byte)(217)))));
@@ -76,5 +87,6 @@
         #endregion
         public System.Windows.Forms.Label infoLabel;
         public System.Windows.Forms.PictureBox previewBox;
+        private System.Windows.Forms.ProgressBar loadProgressBar;
     }
 }

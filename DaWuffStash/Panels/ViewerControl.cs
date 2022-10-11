@@ -40,6 +40,37 @@ namespace DaWuffStash.Panels
             OpenLinkButton.ModernifyInteraction();
             openFileButton.AddBorder();
             openFileButton.ModernifyInteraction();
+
+            CT_PauseLB.AddBorder();
+            CT_PauseLB.ModernifyInteraction();
+            CT_PauseLB.MouseUp += CT_PauseLB_MouseUp;
+            CT_PlayLB.AddBorder();
+            CT_PlayLB.ModernifyInteraction();
+            CT_PlayLB.MouseUp += CT_PlayLB_MouseUp;
+            CT_StopLB.AddBorder();
+            CT_StopLB.ModernifyInteraction();
+            CT_StopLB.MouseUp += CT_StopLB_MouseUp;
+        }
+
+        private void CT_StopLB_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (vlcControl.IsPlaying)
+            {
+                vlcControl.Stop();
+            }
+        }
+
+        private void CT_PlayLB_MouseUp(object sender, MouseEventArgs e)
+        {
+            vlcControl.Play();
+        }
+
+        private void CT_PauseLB_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(vlcControl.IsPlaying)
+            {
+                vlcControl.Pause();
+            }
         }
 
         public void ThrowPost(eData.Post post, Image preview = null)
@@ -47,6 +78,11 @@ namespace DaWuffStash.Panels
             webBrowser.Visible = false;
             pictureBox.Visible = true;
             bottomConsole.Visible = false;
+            vlcMediaControls.Visible = false;
+            if (vlcControl.IsPlaying)
+            {
+                vlcControl.Stop();
+            }
             pictureBox.Image = preview;
             isDownloaded = false;
             path = null;
@@ -91,11 +127,14 @@ namespace DaWuffStash.Panels
                 {
                     if (Directory.Exists("libvlc"))
                     {
+                        vlcMediaControls.Visible = true;
                         if(!vlcInitialized)
                         {
                             FinalizeVLC();
                             vlcInitialized = true;
+                            vlcControl.TimeChanged += this.VlcControl_TimeChanged;
                         }
+                        
                         vlcControl.Visible = true;
                         webBrowser.Visible = false;
                         pictureBox.Visible = false;
@@ -106,17 +145,18 @@ namespace DaWuffStash.Panels
                         BetterMessageBox.Show(
                             "You don't have the VLC Library installed, do you want to open the video file?", 
                             "Da Wuff Stash" , 
+                            new BetterMessageBox.BetterButton("No"),
                             new BetterMessageBox.BetterButton("Yes", true, () => {
                                 System.Diagnostics.Process.Start(val.path);
-                            }),
-                            new BetterMessageBox.BetterButton("No")
+                            })
                         );
                     }
                 }
                 else
                 {
-                    bool isWebPreferred = false;
+                    bool isWebPreferred = Settings.preferences.imageViewType == 1;
                     vlcControl.Visible = false;
+                    vlcMediaControls.Visible = false;
                     webBrowser.Visible = isWebPreferred;
                     pictureBox.Visible = !isWebPreferred;
                     if (isWebPreferred)
@@ -148,6 +188,22 @@ namespace DaWuffStash.Panels
             loadingProgressBar.Value = 0;
             img.Start(post, false);
             numericUpDown.Select();
+        }
+
+        private void VlcControl_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
+        {
+            PostManager.RunOnUIThread(() =>
+            {
+                try
+                {
+                    CT_TrackBar.Value = (int)e.NewTime;
+                    CT_TrackBar.Maximum = (int)vlcControl.Length + 1;
+                }
+                catch
+                {
+                    Console.WriteLine("We messed up internally");
+                }
+            });
         }
 
         public void FinalizeVLC()
@@ -186,6 +242,42 @@ namespace DaWuffStash.Panels
             if(isDownloaded)
             {
                 System.Diagnostics.Process.Start(path);
+            }
+        }
+
+        private void sourcesList_DoubleClick(object sender, EventArgs e)
+        {
+            if(sourcesList.SelectedItem != null)
+            {
+                string s = (string)sourcesList.SelectedItem;
+                if(!string.IsNullOrWhiteSpace(s))
+                {
+                    System.Diagnostics.Process.Start(s);
+                }
+            }
+        }
+
+        private void artistsList_DoubleClick(object sender, EventArgs e)
+        {
+            if (artistsList.SelectedItem != null)
+            {
+                string s = (string)artistsList.SelectedItem;
+                if (!string.IsNullOrWhiteSpace(s) && !s.Contains("----"))
+                {
+                    TagInfoDialog.Show(s);
+                }
+            }
+        }
+
+        private void tagsList_DoubleClick(object sender, EventArgs e)
+        {
+            if (tagsList.SelectedItem != null)
+            {
+                string s = (string)tagsList.SelectedItem;
+                if (!string.IsNullOrWhiteSpace(s) && !s.Contains("----"))
+                {
+                    TagInfoDialog.Show(s);
+                }
             }
         }
     }

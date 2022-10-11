@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DaWuffStash
@@ -13,7 +14,37 @@ namespace DaWuffStash
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            var cProc = Process.GetCurrentProcess();
+            var matchName = cProc.ProcessName;
+            var processes = Process.GetProcesses();
+            Process proc = null;
+            foreach(var procc in processes)
+            {
+                if (procc.ProcessName == matchName && procc.Id != cProc.Id) proc = procc;
+            }
+
+            if (proc != null)
+            {
+                Utils.BetterMessageBox.Show("Another instance of Da Wuff Stash is already running (check system tray), do you want to open another one?", "Da Wuff Stash Duplication Protection", 
+                    new Utils.BetterMessageBox.BetterButton("No", true, () => Application.Exit()),
+                    new Utils.BetterMessageBox.BetterButton("Yes", true, () => {
+                        var mainForm = new MainForm();
+                        mainForm.FormClosed += MainForm_FormClosed;
+                        mainForm.Show();
+                    })
+                    );
+                Application.Run();
+            }
+            else
+            {
+                Application.Run(new MainForm());
+            }
+        }
+
+        private static void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 

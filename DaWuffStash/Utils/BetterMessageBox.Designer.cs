@@ -61,6 +61,7 @@
             this.Controls.Add(this.warningLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BetterMessageBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Da Wuff Stash";
             this.ResumeLayout(false);
 

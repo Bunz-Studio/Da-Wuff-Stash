@@ -14,7 +14,6 @@ namespace DaWuffStash
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.TextBox TypingBox;
 		private System.Windows.Forms.Button Border;
 		
 		/// <summary>
@@ -83,5 +82,7 @@ namespace DaWuffStash
             this.PerformLayout();
 
 		}
-	}
+
+        public System.Windows.Forms.TextBox TypingBox;
+    }
 }

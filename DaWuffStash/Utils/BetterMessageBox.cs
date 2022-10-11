@@ -31,6 +31,7 @@ namespace DaWuffStash.Utils
                     foreach(var but in buttons)
                     {
                         box.AddButton(but);
+                        box.Select();
                         if(but.close)
                         {
                             but.onClick += () => box.Dispose();
@@ -40,6 +41,7 @@ namespace DaWuffStash.Utils
                 else
                 {
                     box.AddButton(new BetterButton("Ok", () => box.Dispose()));
+                    box.Select();
                 }
             }
             box.Show();

@@ -88,13 +88,16 @@ namespace DaWuffStash
                 var point = new Point(control.DisplayRectangle.X, control.DisplayRectangle.Y);
                 e.Graphics.DrawRectangle(new Pen(control.ForeColor), point.X, point.Y, control.Size.Width - 1, control.Size.Height - 1);
             };
+            control.ForeColorChanged += (a, e) => control.Invalidate();
             control.Resize += (a, e) => control.Invalidate();
             control.Move += (a, e) => control.Invalidate();
         }
+
         public static void AddBorder(this Control control, Point point)
         {
             control.Paint += (a, e) =>
             e.Graphics.DrawRectangle(new Pen(control.ForeColor), point.X, point.Y, control.Size.Width - 1, control.Size.Height - 1);
+            control.ForeColorChanged += (a, e) => control.Invalidate();
             control.Resize += (a, e) => control.Refresh();
             control.Resize += (a, e) => control.Invalidate();
             control.Move += (a, e) => control.Invalidate();

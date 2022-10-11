@@ -238,11 +238,32 @@ namespace DaWuffStash
                     i++;
                 }
 
-                if (i < controls.Count)
+                if (i <= controls.Count)
                 {
-                    for (int b = i + 1; b < controls.Count; b++)
+                    var l = new List<Panels.PostListItem>();
+                    for (int b = i; b < controls.Count; b++)
                     {
-                        controls[b].Dispose();
+                        try
+                        {
+                            controls[b].Dispose();
+                            l.Add(controls[b]);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    foreach (var ll in l)
+                    {
+                        try
+                        {
+                            controls.Remove(ll);
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
                 viewerControl.numericUpDown.Maximum = val.posts.Count - 1;
@@ -322,9 +343,15 @@ namespace DaWuffStash
         {
             if (PostManager.posts == null || ignoreChange) return;
 
-            int index = (int)viewerControl.numericUpDown.Value;
-            var p = PostManager.posts.posts[index];
-            viewerControl.ThrowPost(p, p.previewImage);
+            try
+            {
+                int index = (int)viewerControl.numericUpDown.Value;
+                var p = PostManager.posts.posts[index];
+                viewerControl.ThrowPost(p, p.previewImage);
+            }catch
+            {
+
+            }
         }
 
         private void trayIcon_MouseClick(object sender, MouseEventArgs e)

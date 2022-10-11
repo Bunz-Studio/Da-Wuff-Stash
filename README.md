@@ -23,9 +23,13 @@
 - Login system
 - Blacklist system
 ## Libraries Used
-- Newtonsoft.Json (JSON.Net)
-- VLC.DotNet
-- LibVLC (VideoLAN)
+- [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+- [VLC.DotNet](https://github.com/ZeBobo5/Vlc.DotNet)
+- [LibVLC (VideoLAN)](https://www.videolan.org/vlc/)
 
 ### Name and app inspiration
 [The Wolf's Stash by ZepiWolf](https://play.google.com/store/apps/details?id=se.zepiwolf.tws.play&hl=en&gl=US)
+
+### Contact Info
+- Discord: Bunzhida#2758 or [Join the Server](https://discord.gg/ckZW3DfVtW)
+- Twitter: [@bunzhida](https://twitter.com/bunzhida)

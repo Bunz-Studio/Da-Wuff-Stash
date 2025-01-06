@@ -31,5 +31,5 @@
 [The Wolf's Stash by ZepiWolf](https://play.google.com/store/apps/details?id=se.zepiwolf.tws.play&hl=en&gl=US)
 
 ### Contact Info
-- Discord: Bunzhida#2758 or [Join the Server](https://discord.gg/ckZW3DfVtW)
+- Discord: bunzhida
 - Twitter: [@bunzhida](https://twitter.com/bunzhida)
